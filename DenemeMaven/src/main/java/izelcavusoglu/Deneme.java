@@ -11,6 +11,8 @@ public class Deneme {
 
 		return 100 / bolen;
 	}
+	
+
 
 	// private double calculateCoeffýcent(String from, String to) {
 	// // TODO Auto-generated method stub
@@ -28,5 +30,4 @@ public class Deneme {
 	// double coefficent=calculateCoeffýcent(from,to);
 	// return amount*coefficent;
 	// }
-
 }
