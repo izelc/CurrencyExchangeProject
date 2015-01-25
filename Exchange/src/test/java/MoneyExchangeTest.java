@@ -26,7 +26,7 @@ public class MoneyExchangeTest {
 	
 	@Test
 	public void testCalculate()  {
-		assertEquals(2, 35);
+	
 		
 	}
 
