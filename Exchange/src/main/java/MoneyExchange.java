@@ -29,6 +29,9 @@ public class MoneyExchange {
 	public double searchCoefficentMap(String currency1, String currency2) {
 		// HashMapte iki para biriminin sembollerinin birleþtirilmiþ haliyle
 		// oluþan indexe gider, oradaki deðeri geri döndürür.
+		
+		if(currency1.equals(currency2))
+			return 1.0;
 
 		if (coefficentMap.get(concatParity(currency1, currency2)) != null)
 			return coefficentMap.get(concatParity(currency1, currency2));

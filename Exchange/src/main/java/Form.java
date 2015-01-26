@@ -75,13 +75,15 @@ public class Form extends JFrame {
 		contentPane.add(lblTo);
 		
 		JButton btnCalculate = new JButton("CALCULATE!");
+
+		
 		btnCalculate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 			double result=	mnyexc.calculate(fromComboBox.getSelectedItem().toString(), toComboBox.getSelectedItem().toString(), Double.parseDouble(amountTextField.getText()));	
 	         
-			resultTextField.setText(""+result);			
+			resultTextField.setText(String.format("%.02f", result));			
 			}
 		});
 		btnCalculate.setBounds(141, 112, 106, 23);
