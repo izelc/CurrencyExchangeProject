@@ -1,4 +1,8 @@
+package com.cavusoglu.exchange;
+
 import java.util.HashMap;
+
+
 
 public class MoneyExchange {
 
@@ -15,14 +19,15 @@ public class MoneyExchange {
 		coefficentMap.put("TL/EUR", 0.37);
 	}
 
+	
 	public String concatParity(String currency1, String currency2) { // iki para
 																		// biriminin
 																		// sembolunü
 																		// birleþtirir.
-		// TODO Auto-generated method stub
-		String pair = currency1;
-		pair = pair.concat("/").concat(currency2);
-		return pair;
+	        String pair = currency1;
+			pair = pair.concat("/").concat(currency2);
+			return pair;
+		
 
 	}
 
@@ -30,25 +35,30 @@ public class MoneyExchange {
 		// HashMapte iki para biriminin sembollerinin birleþtirilmiþ haliyle
 		// oluþan indexe gider, oradaki deðeri geri döndürür.
 		
-		if(currency1.equals(currency2))
-			return 1.0;
+		
+			if(currency1.equals(currency2))
+				return 1.0;
 
-		if (coefficentMap.get(concatParity(currency1, currency2)) != null)
-			return coefficentMap.get(concatParity(currency1, currency2));
-		else {
-			if (coefficentMap.get(concatParity(currency2, currency1)) != null)
-				return (1 / coefficentMap
-						.get(concatParity(currency2, currency1)));
-
-			else
+			if (coefficentMap.get(concatParity(currency1, currency2)) != null)
+				return coefficentMap.get(concatParity(currency1, currency2));
+			else 
+			{
+				if (coefficentMap.get(concatParity(currency2, currency1)) != null)
+					return (1 / coefficentMap.get(concatParity(currency2, currency1)));
+				else
 				return -1.0;
-
-		}
+			}
+		
 	}
 	
- public double calculate(String currency1 ,String currency2,double amount ){
+ public double calculate(String currency1 ,String currency2,double amount ) throws NegativeAmountException{
 	
-		 return amount*searchCoefficentMap(currency1, currency2);
+	 if (amount<0)
+	 throw new NegativeAmountException();
+	     if(searchCoefficentMap(currency1, currency2)==-1.0)
+	    	 return -1.0; 
+   
+	     return amount*searchCoefficentMap(currency1, currency2);
 		 
 	 }
 
