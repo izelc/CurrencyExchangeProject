@@ -42,12 +42,13 @@ public class Form extends JFrame {
 	MoneyExchange mnyexc=new MoneyExchange();
 	private JTextField addentCurrencyAmountTextField;
 	private JTextField resultOfSumTextField;
-	private JTextField OperationTextField;
+	private JTextField operationTextField;
 	/**
 	 * Launch the application.
 	 */
 	
 	private double sumResult=0.0;
+	private JButton calcButton;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,7 +65,7 @@ public class Form extends JFrame {
 	
 	private void writeTheOperation(String amount, String currencyUnit) {
 		// TODO Auto-generated method stub
-		OperationTextField.setText(OperationTextField.getText()+amount+" "+currencyUnit+" + ");
+		operationTextField.setText(operationTextField.getText()+amount+" "+currencyUnit+" + ");
 		
 
 	}
@@ -81,7 +82,7 @@ public class Form extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(29, 11, 539, 346);
+		tabbedPane.setBounds(33, 11, 539, 346);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -93,6 +94,7 @@ public class Form extends JFrame {
 		panel.add(lblFrom);
 		
 		final JComboBox fromComboBox = new JComboBox();
+		fromComboBox.setName("fromComboBox");
 		fromComboBox.setBounds(183, 60, 93, 20);
 		panel.add(fromComboBox);
 		fromComboBox.setModel(new DefaultComboBoxModel(new String[] {"EUR", "USD", "TL", "GBP"}));
@@ -102,6 +104,7 @@ public class Form extends JFrame {
 		panel.add(lblTo);
 		
 		final JComboBox toComboBox = new JComboBox();
+		toComboBox.setName("toComboBox");
 		toComboBox.setBounds(302, 60, 93, 20);
 		panel.add(toComboBox);
 		toComboBox.setModel(new DefaultComboBoxModel(new String[] {"EUR", "USD", "TL", "GBP"}));
@@ -111,6 +114,7 @@ public class Form extends JFrame {
 		panel.add(lblAmount);
 		
 		amountTextField = new JTextField();
+		amountTextField.setName("amountTextField");
 		amountTextField.setBounds(56, 60, 86, 20);
 		panel.add(amountTextField);
 		amountTextField.setColumns(10);
@@ -119,14 +123,33 @@ public class Form extends JFrame {
 		lblResult.setBounds(183, 228, 52, 14);
 		panel.add(lblResult);
 		
-		JButton btnCalculate = new JButton("CALCULATE!");
-		btnCalculate.setBounds(184, 146, 93, 23);
-		panel.add(btnCalculate);
-		
 		resultTextField = new JTextField();
+		resultTextField.setName("resultTextField");
 		resultTextField.setBounds(183, 253, 86, 20);
 		panel.add(resultTextField);
 		resultTextField.setColumns(10);
+		
+		calcButton = new JButton("Calculate!");
+		calcButton.setName("calcButton");
+		calcButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+				double result = 0;
+				try {
+					resultTextField.setText("");
+					result = mnyexc.calculate(fromComboBox.getSelectedItem().toString(), toComboBox.getSelectedItem().toString(), Double.parseDouble(amountTextField.getText()));
+					resultTextField.setText(String.format("%.02f", result));			
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Please enter a valid value to amount field!", Message, JOptionPane.ERROR_MESSAGE);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Please check the inputs that you've given!", Message, JOptionPane.ERROR_MESSAGE);
+				}	
+			}
+		});
+		calcButton.setBounds(187, 139, 89, 23);
+		panel.add(calcButton);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Sum", null, panel_1, null);
@@ -139,6 +162,7 @@ public class Form extends JFrame {
 		AddentPanel.setLayout(null);
 		
 		JComboBox addentUnitComboBox = new JComboBox();
+		addentUnitComboBox.setName("addentUnitComboBox");
 		addentUnitComboBox.setBounds(10, 56, 96, 20);
 		AddentPanel.add(addentUnitComboBox);
 		addentUnitComboBox.setModel(new DefaultComboBoxModel(new String[] {"EUR", "USD", "TL", "GBP"}));
@@ -154,6 +178,7 @@ public class Form extends JFrame {
 		AddentPanel.add(lblAddentCurrecyAmount);
 		
 		addentCurrencyAmountTextField = new JTextField();
+		addentCurrencyAmountTextField.setName("addentCurrencyAmountTextField");
 		addentCurrencyAmountTextField.setBounds(141, 56, 96, 20);
 		AddentPanel.add(addentCurrencyAmountTextField);
 		addentCurrencyAmountTextField.setColumns(10);
@@ -167,6 +192,8 @@ public class Form extends JFrame {
 		ResultInfoPanel.setLayout(null);
 		
 		JComboBox resultUnitComboBox = new JComboBox();
+		resultUnitComboBox.setName("resultUnitComboBox");
+		resultUnitComboBox.setName("resultUnitComboBox");
 		resultUnitComboBox.setBounds(169, 17, 86, 20);
 		ResultInfoPanel.add(resultUnitComboBox);
 		resultUnitComboBox.setModel(new DefaultComboBoxModel(new String[] {"EUR", "USD", "TL", "GBP"}));
@@ -183,15 +210,17 @@ public class Form extends JFrame {
 		yourOperationPanel.setLayout(null);
 		
 		resultOfSumTextField = new JTextField();
+		resultOfSumTextField.setName("resultOfSumTextField");
 		resultOfSumTextField.setBounds(107, 58, 120, 20);
 		yourOperationPanel.add(resultOfSumTextField);
 		resultOfSumTextField.setColumns(10);
 		
-		OperationTextField = new JTextField();
-		OperationTextField.setEditable(false);
-		OperationTextField.setBounds(41, 27, 250, 20);
-		yourOperationPanel.add(OperationTextField);
-		OperationTextField.setColumns(10);
+		operationTextField = new JTextField();
+		operationTextField.setName("operationTextField");
+		operationTextField.setEditable(false);
+		operationTextField.setBounds(41, 27, 250, 20);
+		yourOperationPanel.add(operationTextField);
+		operationTextField.setColumns(10);
 		
 		JLabel lblResult_1 = new JLabel("Result");
 		lblResult_1.setBounds(51, 61, 46, 14);
@@ -210,8 +239,9 @@ public class Form extends JFrame {
 		yourOperationPanel.add(CurrencyUnitLabel);
 		
 		
-		JButton AddButton = new JButton("Add");
-		AddButton.addMouseListener(new MouseAdapter() {
+		JButton addButton = new JButton("Add");
+		addButton.setName("addButton");
+		addButton.addMouseListener(new MouseAdapter() {
 			
 
 			@Override
@@ -231,51 +261,32 @@ public class Form extends JFrame {
 				}
 			}
 		});
-		AddButton.addActionListener(new ActionListener() {
+		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		AddButton.setBounds(291, 55, 89, 23);
-		AddentPanel.add(AddButton);
+		addButton.setBounds(291, 55, 89, 23);
+		AddentPanel.add(addButton);
 		
 		
 		
 		
 		
-		JButton ResetButton = new JButton("RESET");
-		ResetButton.addMouseListener(new MouseAdapter() {
+		JButton resetButton = new JButton("RESET");
+		resetButton.setName("resetButton");
+		resetButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			   resultUnitComboBox.enable();
-			   OperationTextField.setText("");
+			   operationTextField.setText("");
 			   sumResult=0.0;
 			   resultOfSumTextField.setText("");
 			   addentCurrencyAmountTextField.setText("");
 			   CurrencyUnitLabel.setText("");
 			}
 		});
-		ResetButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		ResetButton.setBounds(73, 89, 118, 23);
-		yourOperationPanel.add(ResetButton);
-		
-				
-				btnCalculate.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-		
-					double result = 0;
-					try {
-						resultTextField.setText("");
-						result = mnyexc.calculate(fromComboBox.getSelectedItem().toString(), toComboBox.getSelectedItem().toString(), Double.parseDouble(amountTextField.getText()));
-						resultTextField.setText(String.format("%.02f", result));			
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(null, "Please enter a valid value to amount field!", Message, JOptionPane.ERROR_MESSAGE);
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null, "Please check the inputs that you've given!", Message, JOptionPane.ERROR_MESSAGE);
-					}	
-			         
-					}
-				});
+		resetButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		resetButton.setBounds(73, 89, 118, 23);
+		yourOperationPanel.add(resetButton);
 	}
 }

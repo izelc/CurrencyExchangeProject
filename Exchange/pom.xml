@@ -23,5 +23,27 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+		
+		
+		<dependency>
+	<groupId>org.easytesting</groupId>
+	<artifactId>fest-swing</artifactId>
+	<version>1.2.1</version>
+</dependency>
+		
+		<dependency>
+	<groupId>org.easytesting</groupId>
+	<artifactId>fest-swing-testng</artifactId>
+	<version>1.2.1</version>
+</dependency>
+
+		
+		<dependency>
+	<groupId>org.testng</groupId>
+	<artifactId>testng</artifactId>
+	<version>6.8.17</version>
+</dependency>
+		
+		
 	</dependencies>
 </project>
