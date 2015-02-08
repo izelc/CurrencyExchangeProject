@@ -37,7 +37,6 @@ public class GUITest {
 		});
 		window = new FrameFixture(frame);
 		frame.setVisible(true);
-		// window.show(); // shows the frame to test
 	}
 
 	@After
@@ -48,43 +47,35 @@ public class GUITest {
 	@Test
 	public void shouldCalculteWhenGivenRightInputs() {
 		window.textBox("amountTextField").enterText("1");
-
 		window.comboBox("fromComboBox").selectItem("EUR");
 		window.comboBox("toComboBox").selectItem("USD");
 		window.button("calcButton").click();
 		window.textBox("resultTextField").requireText("1.12");
-
 	}
 
 	@Test
 	public void whenExceptionOccursJOptionPaneAppears() {
-
 		window.comboBox("fromComboBox").selectItem("EUR");
 		window.comboBox("toComboBox").selectItem("USD");
 		window.button("calcButton").click();
 		window.dialog().requireEnabled();
 		window.dialog().button().click();
-		
 
-		 window.textBox("amountTextField").enterText("-1");
-		 window.comboBox("fromComboBox").selectItem("EUR");
-		 window.comboBox("toComboBox").selectItem("USD");
-		 window.button("calcButton").click();
-		 window.dialog().requireEnabled();
-		
-
+		window.textBox("amountTextField").enterText("-1");
+		window.comboBox("fromComboBox").selectItem("EUR");
+		window.comboBox("toComboBox").selectItem("USD");
+		window.button("calcButton").click();
+		window.dialog().requireEnabled();
 	}
-	
+
 	@Test
 	public void addButtonSetsResultUnitComboBoxDisabled() throws Exception {
 		window.tabbedPane().selectTab(1);
 		window.textBox("addentCurrencyAmountTextField").enterText("1");
 		window.button("addButton").click();
 		window.comboBox("resultUnitComboBox").requireDisabled();
-		
 	}
-	
-	
+
 	@Test
 	public void addButtonWorksProperly() throws Exception {
 		window.tabbedPane().selectTab(1);
@@ -92,17 +83,17 @@ public class GUITest {
 		window.textBox("addentCurrencyAmountTextField").enterText("1");
 		window.button("addButton").click();
 		window.textBox("resultOfSumTextField").requireText("2.70");
-		
 	}
-	
-//	@Test
-//	public void addButtonRecordsOperationAtOperationTextField() throws Exception {
-//		window.tabbedPane().selectTab(1);
-//		window.comboBox("resultUnitComboBox").selectItem("TL");
-//		window.textBox("addentCurrencyAmountTextField").enterText("1");
-//		window.button("addButton").click();
-//		window.textBox("operationTextField").requireText("1 TL +");
-//		
-//	}
-	
+
+	// @Test
+	// public void addButtonRecordsOperationAtOperationTextField() throws
+	// Exception {
+	// window.tabbedPane().selectTab(1);
+	// window.comboBox("resultUnitComboBox").selectItem("TL");
+	// window.textBox("addentCurrencyAmountTextField").enterText("1");
+	// window.button("addButton").click();
+	// window.textBox("operationTextField").requireText("1 TL +");
+	//
+	// }
+
 }
