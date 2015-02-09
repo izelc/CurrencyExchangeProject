@@ -1,6 +1,5 @@
 package com.cavusoglu.exchange;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,17 +17,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JTabbedPane;
 
-import java.awt.FlowLayout;
-
 import javax.swing.border.TitledBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.border.MatteBorder;
-
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

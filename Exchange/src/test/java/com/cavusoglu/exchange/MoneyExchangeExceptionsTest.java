@@ -17,7 +17,7 @@ public class MoneyExchangeExceptionsTest {
 	@Test
 	public void throwsExceptionWhenParametersAreNullAtSearchCoefficentMethod() {
 		thrown.expect(NullPointerException.class);
-		new MoneyExchange().searchCoefficentMap(null, null);
+		new MoneyExchange().searchCurrencyCharts(null, null);
 
 	}
 
@@ -28,10 +28,10 @@ public class MoneyExchangeExceptionsTest {
 
 	}
 
-	@Test(expected = CoefficentDoesntFoundException.class)
+	@Test(expected = CurrencyPairDoesntFoundException.class)
 	// other way to test exceptions
 	public void throwsExceptionWhenCoefficentDoesntFound() {
-		new MoneyExchange().searchCoefficentMap("dcsdsd", "SDFSDF");
+		new MoneyExchange().searchCurrencyCharts("dcsdsd", "SDFSDF");
 
 	}
 
@@ -63,7 +63,7 @@ public class MoneyExchangeExceptionsTest {
 			a = e;
 		}
 
-		assertTrue(a instanceof CoefficentDoesntFoundException);
+		assertTrue(a instanceof CurrencyPairDoesntFoundException);
 
 	}
 

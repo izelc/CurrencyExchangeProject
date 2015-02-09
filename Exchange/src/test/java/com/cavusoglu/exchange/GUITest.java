@@ -55,12 +55,14 @@ public class GUITest {
 
 	@Test
 	public void whenExceptionOccursJOptionPaneAppears() {
+        // when user doesn't enter a value to amount field
 		window.comboBox("fromComboBox").selectItem("EUR");
 		window.comboBox("toComboBox").selectItem("USD");
 		window.button("calcButton").click();
 		window.dialog().requireEnabled();
 		window.dialog().button().click();
 
+		// when user enter negative amount
 		window.textBox("amountTextField").enterText("-1");
 		window.comboBox("fromComboBox").selectItem("EUR");
 		window.comboBox("toComboBox").selectItem("USD");
