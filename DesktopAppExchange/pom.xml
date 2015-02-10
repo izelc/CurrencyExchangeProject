@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cavusoglu</groupId>
-	<artifactId>Exchange</artifactId>
+	<artifactId>DesktopAppExchange</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<plugins>
@@ -17,12 +17,13 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
-		
+
 		<dependency>
-			<groupId>com.miglayout</groupId>
-			<artifactId>miglayout</artifactId>
-			<version>3.7.4</version>
+			<groupId>com.cavusoglu</groupId>
+			<artifactId>Exchange</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -30,7 +31,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>1.4</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.easytesting</groupId>
@@ -38,17 +43,12 @@
 			<version>1.2.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-swing-testng</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8.17</version>
+			<version>6.1.1</version>
+			<scope>test</scope>
 		</dependency>
 
 
