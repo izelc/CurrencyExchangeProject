@@ -1,0 +1,101 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css.map">
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="wow.js"></script>
+<style>
+h3 {
+	color: blue;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<ul class="nav nav-tabs" style="border-bottom: none;">
+					<li role="presentation"><a href="index.html">Only
+							Convert</a></li>
+					<li role="presentation"  class="active"><a href="convert-and-sum.html">Convert&Sum</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				<h3>Amount:</h3>
+				<input type="text" class="form-control"
+					aria-label="Amount (to the nearest dollar)">
+			</div>
+			<div class="col-md-2">
+				<h3>Currency:</h3>
+				<!-- Single button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false">
+						Select <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">EUR</a></li>
+						<li><a href="#">USD</a></li>
+						<li><a href="#">TL</a></li>
+						<li><a href="#">GBP</a></li>
+
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
+					type="button" class="btn btn-default">+=</button>
+			</div>
+			<div class="col-md-2">
+				<h3>Result:</h3>
+
+				<input type="text" class="form-control"
+					aria-label="Amount (to the nearest dollar)">
+
+			</div>
+			<div class="col-md-2">
+				<h3>Currency:</h3>
+				<button type="button" class="btn btn-default dropdown-toggle"
+					data-toggle="dropdown" aria-expanded="false">
+					Select <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">EUR</a></li>
+					<li><a href="#">USD</a></li>
+					<li><a href="#">TL</a></li>
+					<li><a href="#">GBP</a></li>
+
+				</ul>
+			</div>
+
+
+		</div>
+		
+		<div class="row">
+		<div class="col-md-6">
+				<h3 style="color: pink;">Your Operation:</h3>
+				<input type="text" class="form-control"
+					aria-label="Amount (to the nearest dollar)">
+			</div>
+			
+			<div class="col-md-2">
+				<button style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
+					type="button" class="btn btn-default">RESET</button>
+			</div>
+		
+		
+		</div>
+
+
+	</div>
+	
+</body>
+</html>
