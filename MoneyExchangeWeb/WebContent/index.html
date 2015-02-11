@@ -1,11 +1,10 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css.map">
-<script src="js/bootstrap.js"></script>
 <script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="wow.js"></script>
+	<script src="js/wow.js"></script>
 <style>
 h3 {
 	color: blue;
@@ -25,52 +24,54 @@ h3 {
 			</div>
 		</div>
 	</nav>
-	
+
 	<form action="ConvertServlet" method="get">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-2">
-				<h3>Amount:</h3>
-				<input type="text" name="amount" class="form-control"
-					aria-label="Amount (to the nearest dollar)">
-			</div>
-			<div class="col-md-2">
-				<h3>Currency:</h3>
-<select class="form-control" name="fromCurrency">
-    <option value="EUR">EUR</option>
-    <option value="USD">USD</option>
-    <option value="GBP">GBP</option>
-    <option value="TL">TL</option>
-</select>			
-			</div>
-			<div class="col-md-2">
-				<button style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
-					type="submit" class="btn btn-default">=</button>
-			</div>
-			<div class="col-md-2">
-				<h3>Result:</h3>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<h3>Amount:</h3>
+					<input type="text" id="amountTextBox" name="amount"
+						class="form-control" aria-label="Amount (to the nearest dollar)">
+				</div>
+				<div class="col-md-2">
+					<h3>Currency:</h3>
+					<select class="form-control" name="fromCurrency"
+						id="fromCurrencyComboBox">
+						<option value="EUR">EUR</option>
+						<option value="USD">USD</option>
+						<option value="GBP">GBP</option>
+						<option value="TL">TL</option>
+					</select>
+				</div>
+				<div class="col-md-2">
+					<button
+						style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
+						type="submit" class="btn btn-default" id="calculateButton">=</button>
+				</div>
+				<div class="col-md-2">
+					<h3>Result:</h3>
 
-				<input type="text" class="form-control"
-					aria-label="Amount (to the nearest dollar)">
+					<input type="text" class="form-control" id="resultTextBox">
 
-			</div>
-			<div class="col-md-2">
-				<h3>Currency:</h3>
-				
-				<select class="form-control" name="toCurrency">
-    <option value="EUR">EUR</option>
-    <option value="USD">USD</option>
-    <option value="GBP">GBP</option>
-    <option value="TL">TL</option>
-</select>	
-				
+				</div>
+				<div class="col-md-2">
+					<h3>Currency:</h3>
+
+					<select class="form-control" name="toCurrency"
+						id="toCurrencyComboBox">
+						<option value="EUR">EUR</option>
+						<option value="USD">USD</option>
+						<option value="GBP">GBP</option>
+						<option value="TL">TL</option>
+					</select>
+
+				</div>
+
+
 			</div>
 
 
 		</div>
-
-
-	</div>
 	</form>
 </body>
 </html>

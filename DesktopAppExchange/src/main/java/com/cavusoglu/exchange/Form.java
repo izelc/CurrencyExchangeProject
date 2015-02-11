@@ -38,6 +38,7 @@ public class Form extends JFrame {
 
 	private double sumResult = 0.0;
 	private JButton calcButton;
+	SumOfCurrencies sc = new SumOfCurrencies();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -216,6 +217,7 @@ public class Form extends JFrame {
 		resultOfSumTextField.setBounds(107, 58, 120, 20);
 		yourOperationPanel.add(resultOfSumTextField);
 		resultOfSumTextField.setColumns(10);
+		resultOfSumTextField.setText("0.0");
 
 		operationTextField = new JTextField();
 		operationTextField.setName("operationTextField");
@@ -234,21 +236,24 @@ public class Form extends JFrame {
 
 		JButton addButton = new JButton("Add");
 		addButton.setName("addButton");
+
 		addButton.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 				try {
-					sumResult += mnyexc.calculate(addentUnitComboBox
-							.getSelectedItem().toString(), resultUnitComboBox
-							.getSelectedItem().toString(), Double
-							.parseDouble(addentCurrencyAmountTextField
-									.getText()));
-					resultOfSumTextField.setText(String.format("%.02f",
-							sumResult));
-					writeTheOperation(addentCurrencyAmountTextField.getText(),
-							addentUnitComboBox.getSelectedItem().toString());
+					resultOfSumTextField.setText(sc.addCurrencies(
+							addentUnitComboBox.getSelectedItem().toString(),
+							resultUnitComboBox.getSelectedItem().toString(),
+							Double.parseDouble(addentCurrencyAmountTextField
+									.getText()), Double
+									.parseDouble(resultOfSumTextField.getText()
+											.replace(",", "."))));
+					operationTextField.setText(sc.writeTheOperation(
+							operationTextField.getText(),
+							addentCurrencyAmountTextField.getText(),
+							addentUnitComboBox.getSelectedItem().toString()));
 					resultUnitComboBox.disable();
 					CurrencyUnitLabel.setText(resultUnitComboBox
 							.getSelectedItem().toString());
@@ -279,6 +284,7 @@ public class Form extends JFrame {
 				resultOfSumTextField.setText("");
 				addentCurrencyAmountTextField.setText("");
 				CurrencyUnitLabel.setText("");
+				resultOfSumTextField.setText("0.0");
 			}
 		});
 		resetButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
