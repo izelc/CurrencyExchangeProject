@@ -32,11 +32,12 @@ public class SumCurrenciesServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String addentAmount = request.getParameter("addentAmountTextBox");
-		String addentCurrency=request.getParameter("addentCurrencyComboBox");
-		String resultCurrency=request.getParameter("resultCurrencyComboBox");
-		String resultAmount=request.getParameter("resultAmountTextBox");
-		String sum = sumOfCurrencies.addCurrencies(addentCurrency, resultCurrency,Double.parseDouble(addentAmount),Double.parseDouble(resultAmount));
+		String addentAmount1 = request.getParameter("addentAmountTextBox1");
+		String addentCurrency1=request.getParameter("addentCurrencyComboBox1");
+		String addentCurrency2=request.getParameter("addentCurrencyComboBox2");
+		String addentAmount2=request.getParameter("addentAmountTextBox2");
+		String resultCurrency= request.getParameter("resultCurrencyComboBox");
+		String sum = sumOfCurrencies.addCurrencies(addentCurrency1, addentCurrency2,Double.parseDouble(addentAmount1),Double.parseDouble(addentAmount2),resultCurrency);
 		response.getWriter().print(sum);
 	}
 
