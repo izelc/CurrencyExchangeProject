@@ -135,7 +135,7 @@ public class Form extends JFrame {
 							.toString(), toComboBox.getSelectedItem()
 							.toString(), Double.parseDouble(amountTextField
 							.getText()));
-					resultTextField.setText(String.format("%.02f", result));
+					resultTextField.setText(String.format("%.04f", result));
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null,
