@@ -16,11 +16,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTabbedPane;
-
 import javax.swing.border.TitledBorder;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.net.SocketTimeoutException;
 
 public class Form extends JFrame {
 
@@ -141,7 +142,8 @@ public class Form extends JFrame {
 					JOptionPane.showMessageDialog(null,
 							"Please enter a valid value to amount field!",
 							Message, JOptionPane.ERROR_MESSAGE);
-				} catch (Exception e1) {
+				} 
+				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null,
 							"Please check the inputs that you've given!",
 							Message, JOptionPane.ERROR_MESSAGE);

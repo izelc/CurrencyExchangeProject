@@ -12,23 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.cavusoglu.exchange.MoneyExchange;
 
 /**
- * Servlet implementation class ConvertServlet
+ * This Servlet is designed for index.html
  */
 @WebServlet("/ConvertServlet")
 public class ConvertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ConvertServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
+	 * 
+	 *      When submit button clicked this doGet() method prints the result of
+	 *      convert operation in resutTextBox(the html element). Also other info
+	 *      that user has given to html elements wont fades away after submit
+	 *      button clicked.
+	 * 
 	 */
 
 	protected void doGet(HttpServletRequest request,
@@ -65,15 +63,6 @@ public class ConvertServlet extends HttpServlet {
 				+ "name=\"toCurrency\"\r\n\t\t\t\t\t\tid=\"toCurrencyComboBox\">\r\n\t\t\t\t\t\t<option value=\"EUR\">EUR</option>\r\n\t\t\t\t\t\t<option value=\"USD\">USD</option>\r\n\t\t\t\t\t\t<option value=\"GBP\">GBP</option>\r\n\t\t\t\t\t\t<option value=\"TL\">TL</option>\r\n\t\t\t\t\t</select>\r\n\r\n\t\t\t\t</div>\r\n\r\n\r\n\t\t\t</div>\r\n\r\n\r\n\t\t</div>\r\n\t</form>\r\n</body>\r\n</html>";
 		response.getWriter().print(html);
 		response.getWriter().flush();
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

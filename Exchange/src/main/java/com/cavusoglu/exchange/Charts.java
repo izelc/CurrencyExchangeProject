@@ -9,61 +9,22 @@ import org.jsoup.Jsoup;
 public class Charts {
 
 	private HashMap<String, Double> currencyCharts = new HashMap<String, Double>();
-	private String cof;
 
 	public Charts() {
 
 		try {
-			Document document = Jsoup
-					.connect(
-							"https://www.google.com/finance?q=USDJPY&ei=vBreVKnAAoOYwQO7toCwAQ")
-					.get();
-			cof = document
-					.select("#gf-viewc > div > div > div.g-section.g-tpl-right-1 > div:nth-child(2) > div:nth-child(2) > div.sfe-section > table > tbody > tr:nth-child(1) > td:nth-child(2)")
-					.text().substring(2);
-			currencyCharts.put("USD/GBP", Double.parseDouble(cof));
 
-			cof = document
-					.select("#gf-viewc > div > div > div.g-section.g-tpl-right-1 > div:nth-child(2) > div:nth-child(2) > div.sfe-section > table > tbody > tr:nth-child(2) > td:nth-child(2)")
-					.text().substring(2);
-			currencyCharts.put("USD/EUR", Double.parseDouble(cof));
+			currencyCharts.put("USD/GBP", connectToData("USDJPY", 1));
 
-			document = Jsoup
-					.connect(
-							"https://www.google.com/finance?q=GBPUSD&ei=DYTeVLicKJLCwAPxwoDQAw")
-					.get();
-			cof = document
-					.select("#gf-viewc > div > div > div.g-section.g-tpl-right-1 > div:nth-child(2) > div:nth-child(2) > div.sfe-section > table > tbody > tr:nth-child(2) > td:nth-child(2)")
-					.text().substring(2);
-			currencyCharts.put("GBP/EUR", Double.parseDouble(cof));
+			currencyCharts.put("EUR/USD", connectToData("EURJPY", 1));
 
-			document = Jsoup
-					.connect(
-							"https://www.google.com/finance?q=CURRENCY%3ATRY&ei=FoTeVKCkKIu-wAP9-IDACA")
-					.get();
-			cof = document
-					.select("#gf-viewc > div > div > div.g-section.g-tpl-right-1 > div:nth-child(2) > div:nth-child(2) > div.sfe-section > table > tbody > tr:nth-child(1) > td:nth-child(2)")
-					.text().substring(2);
-			currencyCharts.put("TL/GBP", Double.parseDouble(cof));
+			currencyCharts.put("EUR/GBP", connectToData("EURJPY", 2));
 
-			document = Jsoup
-					.connect(
-							"https://www.google.com/finance?q=CURRENCY%3ATRY&ei=FoTeVKCkKIu-wAP9-IDACA")
-					.get();
-			cof = document
-					.select("#currency_value > div.sfe-break-bottom-4 > span.pr > span")
-					.text();
-			cof = cof.substring(0, cof.length() - 4);
-			currencyCharts.put("TL/USD", Double.parseDouble(cof));
+			currencyCharts.put("TL/GBP", connectToData("TRYJPY", 2));
 
-			document = Jsoup
-					.connect(
-							"https://www.google.com/finance?q=CURRENCY%3ATRY&ei=FoTeVKCkKIu-wAP9-IDACA")
-					.get();
-			cof = document
-					.select("#gf-viewc > div > div > div.g-section.g-tpl-right-1 > div:nth-child(2) > div:nth-child(2) > div.sfe-section > table > tbody > tr:nth-child(3) > td:nth-child(2)")
-					.text().substring(2);
-			currencyCharts.put("TL/EUR", Double.parseDouble(cof));
+			currencyCharts.put("TL/USD", connectToData("TRYJPY", 1));
+
+			currencyCharts.put("TL/EUR", connectToData("TRYJPY", 3));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -74,6 +35,35 @@ public class Charts {
 
 	public HashMap<String, Double> getCurrencyCharts() {
 		return currencyCharts;
+	}
+
+	private double connectToData(String q, int index) {
+		/*
+		 * Connects related section of google finance to find related parity.
+		 * Returns the parity that we search as double.
+		 */
+
+		String site = "https://www.google.com/finance?q=" + q;
+		Document document = null;
+		String cssPath = "#gf-viewc > div > div > div.g-section.g-tpl-right-1 > div:nth-child(2) > div:nth-child(2) > div.sfe-section > table > tbody > tr:nth-child("
+				+ index + ") > td:nth-child(2)";
+		try {
+			document = Jsoup.connect(site).get();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return convertCurrencyDataToDouble(document.select(cssPath).text());
+
+	}
+
+	private double convertCurrencyDataToDouble(String str) {
+		/*
+		 * removes all non numeric characters in data and then converts data to
+		 * double
+		 */
+		str = str.replaceAll("[^\\d.]", "");
+		return Double.parseDouble(str);
 	}
 
 }
