@@ -22,12 +22,12 @@ public class ChartsTest {
 	public void before() throws IOException {
 		chart = Mockito.spy(new Charts());
 		Document doc = Jsoup.parse(readFile("exampleGoogleFinanceTRYJPY.html"));
-		Mockito.doReturn(doc).when(chart).connectToSite("TRYJPY");
+		Mockito.doReturn(doc).when(chart).getDocument("TRYJPY");
 	}
 
 	@Test
 	public void testConnectToData() throws IOException {
-		double data = chart.connectToData(chart.connectToSite("TRYJPY"),
+		double data = chart.getParity(chart.getDocument("TRYJPY"),
 				chart.findParticularCssPath(1));
 		assertEquals(0.4072, data, 0.0000);
 	}
@@ -35,7 +35,7 @@ public class ChartsTest {
 	@Test
 	public void verifyConvertCurrencyDataToDouble() throws Exception {
 		String str = "$ 0.4072";
-		chart.connectToData(chart.connectToSite("TRYJPY"),
+		chart.getParity(chart.getDocument("TRYJPY"),
 				chart.findParticularCssPath(1));
 		Mockito.verify(chart).convertCurrencyDataToDouble(str);
 

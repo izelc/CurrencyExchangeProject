@@ -3,6 +3,8 @@ package com.cavusoglu.exchange;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.jsoup.nodes.Document;
 import org.jsoup.Jsoup;
 
@@ -13,44 +15,34 @@ import org.jsoup.Jsoup;
  */
 public class Charts {
 
+	private Logger logger = Logger.getLogger(getClass());
 	private HashMap<String, Double> currencyCharts = new HashMap<String, Double>();
 
 	public Charts() {
-
+		PropertyConfigurator.configure("log4j.properties");
+		logger.trace("constructing chart object");
 		try {
 
-			currencyCharts.put(
-					"USD/GBP",
-					connectToData(connectToSite("USDJPY"),
-							findParticularCssPath(1)));
+			currencyCharts.put("USD/GBP",
+					getParity(getDocument("USDJPY"), findParticularCssPath(1)));
 
-			currencyCharts.put(
-					"EUR/USD",
-					connectToData(connectToSite("EURJPY"),
-							findParticularCssPath(1)));
+			currencyCharts.put("EUR/USD",
+					getParity(getDocument("EURJPY"), findParticularCssPath(1)));
 
-			currencyCharts.put(
-					"EUR/GBP",
-					connectToData(connectToSite("EURJPY"),
-							findParticularCssPath(2)));
+			currencyCharts.put("EUR/GBP",
+					getParity(getDocument("EURJPY"), findParticularCssPath(2)));
 
-			currencyCharts.put(
-					"TL/GBP",
-					connectToData(connectToSite("TRYJPY"),
-							findParticularCssPath(2)));
+			currencyCharts.put("TL/GBP",
+					getParity(getDocument("TRYJPY"), findParticularCssPath(2)));
 
-			currencyCharts.put(
-					"TL/USD",
-					connectToData(connectToSite("TRYJPY"),
-							findParticularCssPath(1)));
+			currencyCharts.put("TL/USD",
+					getParity(getDocument("TRYJPY"), findParticularCssPath(1)));
 
-			currencyCharts.put(
-					"TL/EUR",
-					connectToData(connectToSite("TRYJPY"),
-							findParticularCssPath(3)));
+			currencyCharts.put("TL/EUR",
+					getParity(getDocument("TRYJPY"), findParticularCssPath(3)));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("error occured while constructing chart object", e);
 		}
 
 	}
@@ -59,7 +51,7 @@ public class Charts {
 		return currencyCharts;
 	}
 
-	public double connectToData(Document doc, String cssPath) {
+	public double getParity(Document doc, String cssPath) {
 		/*
 		 * Connects document to find related parity. Returns the parity that we
 		 * search as double.
@@ -88,15 +80,20 @@ public class Charts {
 	 *            href='https://www.google.com/finance?q='>google finance</a>
 	 * @return the document that contains parities
 	 */
-	public Document connectToSite(String q) {
+	public Document getDocument(String q) {
+
 		String site = "https://www.google.com/finance?q=" + q;
+		logger.debug("Getting document from site: " + site);
 		Document document = null;
 		try {
 			document = Jsoup.connect(site).get();
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			logger.error(
+					"Error occured while getting document from this site: "
+							+ site, e);
 		}
+		logger.trace("Got document from site: " + site);
 		return document;
 	}
 
@@ -134,22 +131,29 @@ public class Charts {
 	public double searchCurrencyCharts(String currency1, String currency2)
 			throws CurrencyPairDoesntFoundException {
 
+		logger.info("Searching parity from charts. Currency1: " + currency1
+				+ "Currency2: " + currency2);
 		/*
 		 * This method looks for concatenated symbols of two currencies at hash
 		 * map.
 		 */
 
+		double parity;
 		if (currency1.equals(currency2)) {
-			return 1.0;
+			parity = 1.0;
 		}
 
 		if (hasCurrencyPair(currency1, currency2)) {
-			return currencyCharts.get(concatParity(currency1, currency2));
+			parity = currencyCharts.get(concatParity(currency1, currency2));
 		} else if (hasCurrencyPair(currency2, currency1)) {
-			return (1 / currencyCharts.get(concatParity(currency2, currency1)));
+			parity = (1 / currencyCharts
+					.get(concatParity(currency2, currency1)));
 		} else {
 			throw new CurrencyPairDoesntFoundException();
 		}
+		logger.debug("Found parity for curencies. Parity: " + parity
+				+ " Currency1: " + currency1 + " Currency2: " + currency2);
+		return parity;
 	}
 
 	public String concatParity(String currency1, String currency2) {
