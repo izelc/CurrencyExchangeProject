@@ -1,5 +1,11 @@
 package com.cavusoglu.exchange;
 
+import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.client.util.StringContentProvider;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
+
+import com.google.gson.JsonObject;
+
 /**
  * This class is used for holding all the functionality of the money exchanging
  * transaction
@@ -10,59 +16,18 @@ package com.cavusoglu.exchange;
 
 public class MoneyExchange {
 
-	private Charts currencyCharts;
+	private static final String RESTFUL_API_URL = "http://localhost:8080/ExchangeAPI/ChartsServlet";
+//	private Charts currencyCharts;
 
 	public MoneyExchange() { /* Creator pattern is used. */
-		currencyCharts = new Charts();
+	//	currencyCharts = new Charts();
 	}
 
-	public String concatParity(String currency1, String currency2) {
+	
 
-		/* Concatenates two different currencies' string symbol. */
-
-		String pair = currency1;
-		pair = pair.concat("/").concat(currency2);
-		return pair;
-	}
-
-	private boolean hasCurrencyPair(String currency1, String currency2) {
-
-		/* Checks if given currency parity exist in charts */
-
-		if (currencyCharts.getCurrencyCharts().get(
-				concatParity(currency1, currency2)) == null) {
-			return false;
-		} else {
-			return true;
-		}
-
-	}
-
-	public double searchCurrencyCharts(String currency1, String currency2)
-			throws CurrencyPairDoesntFoundException {
-
-		/*
-		 * This method looks for concatenated symbols of two currencies at hash
-		 * map.
-		 */
-
-		if (currency1.equals(currency2)) {
-			return 1.0;
-		}
-
-		if (hasCurrencyPair(currency1, currency2)) {
-			return currencyCharts.getCurrencyCharts().get(
-					concatParity(currency1, currency2));
-		} else if (hasCurrencyPair(currency2, currency1)) {
-			return (1 / currencyCharts.getCurrencyCharts().get(
-					concatParity(currency2, currency1)));
-		} else {
-			throw new CurrencyPairDoesntFoundException();
-		}
-	}
 
 	public double calculate(String currency1, String currency2, double amount)
-			throws NegativeAmountException, CurrencyPairDoesntFoundException {
+			throws Exception {
 
 		/*
 		 * Calculates equivalent given amount of currency1 with respect to
@@ -72,7 +37,52 @@ public class MoneyExchange {
 		if (amount < 0) {
 			throw new NegativeAmountException();
 		}
-		return amount * searchCurrencyCharts(currency1, currency2);
+		if (currency1.equals(currency2)) {
+			return amount;
+		}
+
+		return amount * Double.parseDouble(getParity(currency1, currency2));
+	}
+
+	/**
+	 * Gets parity for given currencies from API.
+	 * 
+	 * @param currency1
+	 *            from Currency.
+	 * @param currency2
+	 *            to Currency.
+	 * @return parity as {@link String}
+	 * @throws Exception
+	 */
+	String getParity(String currency1, String currency2)
+			throws Exception {
+		HttpClient client = new HttpClient(new SslContextFactory(true));
+		client.start();
+		String apiResult = client
+				.POST(RESTFUL_API_URL)
+				.content(
+						new StringContentProvider(createJsonObjectForAPI(
+								currency1, currency2))).send()
+				.getContentAsString();
+		client.stop();
+		return apiResult;
+
+	}
+
+	/**
+	 * Creates {@link JsonObject} for API.
+	 * 
+	 * @param currency1
+	 *            Currency which will be converted from.
+	 * @param currency2
+	 *            Currency which will be converted to.
+	 * @return json object as string
+	 */
+	private String createJsonObjectForAPI(String currency1, String currency2) {
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("fromCurrency", currency1);
+		jsonObject.addProperty("toCurrency", currency2);
+		return jsonObject.toString();
 	}
 
 }

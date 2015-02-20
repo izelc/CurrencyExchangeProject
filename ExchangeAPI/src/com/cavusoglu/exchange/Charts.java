@@ -50,7 +50,6 @@ public class Charts {
 							findParticularCssPath(3)));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -120,4 +119,44 @@ public class Charts {
 		return Double.parseDouble(str);
 	}
 
+	private boolean hasCurrencyPair(String currency1, String currency2) {
+
+		/* Checks if given currency parity exist in charts */
+
+		if (currencyCharts.containsKey(concatParity(currency1, currency2))) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public double searchCurrencyCharts(String currency1, String currency2)
+			throws CurrencyPairDoesntFoundException {
+
+		/*
+		 * This method looks for concatenated symbols of two currencies at hash
+		 * map.
+		 */
+
+		if (currency1.equals(currency2)) {
+			return 1.0;
+		}
+
+		if (hasCurrencyPair(currency1, currency2)) {
+			return currencyCharts.get(concatParity(currency1, currency2));
+		} else if (hasCurrencyPair(currency2, currency1)) {
+			return (1 / currencyCharts.get(concatParity(currency2, currency1)));
+		} else {
+			throw new CurrencyPairDoesntFoundException();
+		}
+	}
+
+	public String concatParity(String currency1, String currency2) {
+
+		/* Concatenates two different currencies' string symbol. */
+		String pair = currency1;
+		pair = pair.concat("/").concat(currency2);
+		return pair;
+	}
 }

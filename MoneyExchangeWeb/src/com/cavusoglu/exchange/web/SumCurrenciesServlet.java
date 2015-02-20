@@ -36,9 +36,16 @@ public class SumCurrenciesServlet extends HttpServlet {
 				.getParameter("addentCurrencyComboBox2");
 		String addentAmount2 = request.getParameter("addentAmountTextBox2");
 		String resultCurrency = request.getParameter("resultCurrencyComboBox");
-		String sum = sumOfCurrencies.addCurrencies(addentCurrency1,
-				addentCurrency2, Double.parseDouble(addentAmount1),
-				Double.parseDouble(addentAmount2), resultCurrency);
+		String sum = null;
+		try {
+			sum = sumOfCurrencies.addCurrencies(addentCurrency1,
+					addentCurrency2, Double.parseDouble(addentAmount1),
+					Double.parseDouble(addentAmount2), resultCurrency);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		response.getWriter().print(sum);
 	}
 

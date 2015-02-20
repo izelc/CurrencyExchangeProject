@@ -21,7 +21,7 @@ public class SumOfCurrencies {
 
 	public String addCurrencies(String addentCurrencyUnit,
 			String resultCurrencyUnit, double addentCurrencyAmount,
-			double totalCurrencyAmount) {
+			double totalCurrencyAmount) throws Exception {
 		/*
 		 * this method adds money to existing result currency. It's very
 		 * eligible for adding more than two currencies.
@@ -34,7 +34,7 @@ public class SumOfCurrencies {
 
 	public String addCurrencies(String addentCurrencyUnit1,
 			String addentCurrencyUnit2, double addentCurrencyAmount1,
-			double addentCurrencyAmount2, String resultCurrencyUnit) {
+			double addentCurrencyAmount2, String resultCurrencyUnit) throws Exception {
 		/*
 		 * this method sums two different currencies with respect to given
 		 * different currency.
