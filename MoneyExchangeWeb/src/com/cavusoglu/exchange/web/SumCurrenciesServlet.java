@@ -21,22 +21,22 @@ public class SumCurrenciesServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response) 
-	 *      When submit button clicked, this doGet method calculates
+	 *      When addButton clicked, this doGet method calculates
 	 *      sum with inputs that user has given.
 	 */
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String addentAmount1 = request.getParameter("addentAmountTextBox1");
+		String addentAmount1 = request.getParameter("addentAmount1");
 		String addentCurrency1 = request
-				.getParameter("addentCurrencyComboBox1");
+				.getParameter("addentCurrency1");
 		String addentCurrency2 = request
-				.getParameter("addentCurrencyComboBox2");
-		String addentAmount2 = request.getParameter("addentAmountTextBox2");
-		String resultCurrency = request.getParameter("resultCurrencyComboBox");
+				.getParameter("addentCurrency2");
+		String addentAmount2 = request.getParameter("addentAmount2");
+		String resultCurrency = request.getParameter("resultCurrency");
 		SumOfCurrencies sumOfCurrencies = new SumOfCurrencies();
-		String sum ="asd";
+		String sum =null;
 	
 		try {  
 			sum = sumOfCurrencies.addCurrencies(addentCurrency1,
