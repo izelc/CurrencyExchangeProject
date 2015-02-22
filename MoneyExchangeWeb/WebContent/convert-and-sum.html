@@ -1,11 +1,11 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css.map">
-<script src="js/bootstrap.js"></script>
 <script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="wow.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/sumCurrenciesScript.js"></script>
 <style>
 h3 {
 	color: blue;
@@ -25,67 +25,75 @@ h3 {
 			</div>
 		</div>
 	</nav>
-	<form action="SumCurrenciesServlet">
-		<div class="container">
 
-			<div class="row">
-				<div class="col-md-2">
-					<h3>Amount:</h3>
-					<input type="text" name="addentAmountTextBox1"
-						class="form-control">
-				</div>
+	<div class="container">
 
-				<div class="col-md-2">
-					<h3>Currency:</h3>
-					<select class="form-control" name="addentCurrencyComboBox1">
-						<option value="EUR">EUR</option>
-						<option value="USD">USD</option>
-						<option value="GBP">GBP</option>
-						<option value="TL">TL</option>
-					</select>
-				</div>
+		<div class="row">
+			<div class="col-md-2">
+				<h3>Amount:</h3>
+				<input type="text" id="addentAmountTextBox1"
+					name="addentAmountTextBox1" class="form-control">
+			</div>
 
-				<div class="col-md-1">
-					<input style="margin-top: 53px; background-color: yellow;"
-						value="   +" class="form-control" readonly="readonly">
-				</div>
+			<div class="col-md-2">
+				<h3>Currency:</h3>
+				<select class="form-control" name="addentCurrencyComboBox1"
+					id="addentCurrencyComboBox1">
+					<option value="EUR">EUR</option>
+					<option value="USD">USD</option>
+					<option value="GBP">GBP</option>
+					<option value="TL">TL</option>
+				</select>
+			</div>
 
-				<div class="col-md-2">
-					<h3>Amount:</h3>
-					<input type="text" name="addentAmountTextBox2" class="form-control">
-				</div>
+			<div class="col-md-1">
+				<input style="margin-top: 53px; background-color: yellow;"
+					value="   +" class="form-control" readonly="readonly">
+			</div>
 
-				<div class="col-md-2">
-					<h3>Currency:</h3>
-					<select class="form-control" name="addentCurrencyComboBox2">
-						<option value="EUR">EUR</option>
-						<option value="USD">USD</option>
-						<option value="GBP">GBP</option>
-						<option value="TL">TL</option>
-					</select>
-				</div>
+			<div class="col-md-2">
+				<h3>Amount:</h3>
+				<input type="text" name="addentAmountTextBox2"
+					id="addentAmountTextBox2" class="form-control">
+			</div>
 
-				<div class="col-md-2">
-					<button name="addButton"
-						style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
-						type="submit" class="btn btn-default">=</button>
-				</div>
+			<div class="col-md-2">
+				<h3>Currency:</h3>
+				<select class="form-control" name="addentCurrencyComboBox2"
+					id="addentCurrencyComboBox2">
+					<option value="EUR">EUR</option>
+					<option value="USD">USD</option>
+					<option value="GBP">GBP</option>
+					<option value="TL">TL</option>
+				</select>
+			</div>
+
+			<div class="col-md-2">
+				<button name="addButton" id="addButton"  type="submit"
+					style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
+					class="btn btn-default">=</button>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<h3>Result Type:</h3>
+				<select class="form-control" name="resultCurrencyComboBox"
+					id="resultCurrencyComboBox">
+					<option value="EUR">EUR</option>
+					<option value="USD">USD</option>
+					<option value="GBP">GBP</option>
+					<option value="TL">TL</option>
+				</select>
 
 			</div>
 
-			<div class="row">
-				<div class="col-md-2">
-					<h3>Result Type:</h3>
-					<select class="form-control" name="resultCurrencyComboBox">
-						<option value="EUR">EUR</option>
-						<option value="USD">USD</option>
-						<option value="GBP">GBP</option>
-						<option value="TL">TL</option>
-					</select>
-
-				</div>
+			<div class="col-md-2">
+				<h3>Result:</h3>
+				<input type="text" name="resultTextBox" id="resultTextBox"
+					class="form-control">
 			</div>
-	</form>
-
+		</div>
 </body>
 </html>

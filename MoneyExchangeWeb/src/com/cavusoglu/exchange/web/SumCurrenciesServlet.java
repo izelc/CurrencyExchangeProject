@@ -17,7 +17,6 @@ import com.cavusoglu.exchange.SumOfCurrencies;
 @WebServlet("/SumCurrenciesServlet")
 public class SumCurrenciesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	SumOfCurrencies sumOfCurrencies = new SumOfCurrencies();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -36,17 +35,22 @@ public class SumCurrenciesServlet extends HttpServlet {
 				.getParameter("addentCurrencyComboBox2");
 		String addentAmount2 = request.getParameter("addentAmountTextBox2");
 		String resultCurrency = request.getParameter("resultCurrencyComboBox");
-		String sum = null;
-		try {
+		SumOfCurrencies sumOfCurrencies = new SumOfCurrencies();
+		String sum ="asd";
+	
+		try {  
 			sum = sumOfCurrencies.addCurrencies(addentCurrency1,
 					addentCurrency2, Double.parseDouble(addentAmount1),
 					Double.parseDouble(addentAmount2), resultCurrency);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		    
 		}
 		response.getWriter().print(sum);
+		response.getWriter().flush();
 	}
 
 }
