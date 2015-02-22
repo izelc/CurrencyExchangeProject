@@ -38,5 +38,19 @@
 			<artifactId>Exchange</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+	<groupId>org.seleniumhq.selenium.grid</groupId>
+	<artifactId>selenium-grid-hub</artifactId>
+	<version>1.0.5</version>
+</dependency>
+
+<dependency>
+	<groupId>org.seleniumhq.selenium</groupId>
+	<artifactId>selenium-java</artifactId>
+	<version>2.44.0</version>
+</dependency>
+
+		
 	</dependencies>
 </project>
