@@ -37,7 +37,7 @@ public class ChartsServlet extends HttpServlet {
 		JsonObject jsonObject = new Gson().fromJson(line, JsonObject.class);
 		String fromCurrency = jsonObject.get("fromCurrency").getAsString();
 		String toCurrency = jsonObject.get("toCurrency").getAsString();
-		double searchCurrencyCharts = new Charts().searchCurrencyCharts(
+		double searchCurrencyCharts = new SearchOnCharts().searchCurrencyCharts(new Charts(),
 				fromCurrency, toCurrency);
 		resp.getWriter().print(searchCurrencyCharts);
 		resp.getWriter().flush();

@@ -61,7 +61,7 @@ public class Charts {
 	}
 
 	/**
-	 * At google finance parities use this kind of css path.This methos is
+	 * At google finance parities use this kind of css path.This method is
 	 * required for avoiding repetition.
 	 * 
 	 * @param index
@@ -116,51 +116,6 @@ public class Charts {
 		return Double.parseDouble(str);
 	}
 
-	private boolean hasCurrencyPair(String currency1, String currency2) {
-
-		/* Checks if given currency parity exist in charts */
-
-		if (currencyCharts.containsKey(concatParity(currency1, currency2))) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
-	public double searchCurrencyCharts(String currency1, String currency2)
-			throws CurrencyPairDoesntFoundException {
-
-		logger.info("Searching parity from charts. Currency1: " + currency1
-				+ "Currency2: " + currency2);
-		/*
-		 * This method looks for concatenated symbols of two currencies at hash
-		 * map.
-		 */
-
-		double parity;
-		if (currency1.equals(currency2)) {
-			parity = 1.0;
-		}
-
-		if (hasCurrencyPair(currency1, currency2)) {
-			parity = currencyCharts.get(concatParity(currency1, currency2));
-		} else if (hasCurrencyPair(currency2, currency1)) {
-			parity = (1 / currencyCharts
-					.get(concatParity(currency2, currency1)));
-		} else {
-			throw new CurrencyPairDoesntFoundException();
-		}
-		logger.debug("Found parity for curencies. Parity: " + parity
-				+ " Currency1: " + currency1 + " Currency2: " + currency2);
-		return parity;
-	}
-
-	public String concatParity(String currency1, String currency2) {
-
-		/* Concatenates two different currencies' string symbol. */
-		String pair = currency1;
-		pair = pair.concat("/").concat(currency2);
-		return pair;
-	}
+	
+	
 }

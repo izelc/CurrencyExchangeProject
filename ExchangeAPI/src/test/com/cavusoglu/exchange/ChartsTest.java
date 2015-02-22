@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -65,29 +66,5 @@ public class ChartsTest {
 		return everything;
 	}
 
-	@Test
-	public void testConcatParity() {
-		assertEquals("EUR/USD", new Charts().concatParity("EUR", "USD"));
-		assertEquals("GBP/USD", new Charts().concatParity("GBP", "USD"));
-		assertEquals("/", new Charts().concatParity("", ""));
-	}
-
-	@Test
-	public void testsearchCurrencyCharts() {
-		
-		assertEquals(2.35, new Charts().searchCurrencyCharts("USD", "TL"),
-				0.0001);
-
-		assertEquals(1 / 2.35, new Charts().searchCurrencyCharts("TL", "USD"),
-				0.0001);
-
-		assertEquals(1.0, new Charts().searchCurrencyCharts("EUR", "EUR"),
-				0.0001);
-
-		assertTrue(0 < new Charts().searchCurrencyCharts("GBP", "USD"));
-
-		assertNotEquals(-1, new Charts().searchCurrencyCharts("TL", "EUR"),
-				0.0001);
-	}
-
+	
 }
