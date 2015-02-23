@@ -66,9 +66,8 @@ public class ChartsTest {
 	
 	@Test
 	public void testName() throws Exception {
-		double searchCurrencyCharts = new ChartsSearcher().searchCurrencyCharts(new Charts(),
-				"USD","EUR");
-		System.out.println(searchCurrencyCharts);
+		HashMap<String, Double> currencyCharts= Charts.getCurrencyCharts();
+		ChartsSearcher cs=new ChartsSearcher(currencyCharts);
 	}
 
 	

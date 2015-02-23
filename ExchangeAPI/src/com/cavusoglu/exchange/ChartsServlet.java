@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,9 @@ public class ChartsServlet extends HttpServlet {
 		JsonObject jsonObject = new Gson().fromJson(line, JsonObject.class);
 		String fromCurrency = jsonObject.get("fromCurrency").getAsString();
 		String toCurrency = jsonObject.get("toCurrency").getAsString();
-		double searchCurrencyCharts = new ChartsSearcher().searchCurrencyCharts(new Charts(),
+		
+		HashMap<String, Double> currencyCharts= Charts.getCurrencyCharts();
+		double searchCurrencyCharts = new ChartsSearcher(currencyCharts).searchCurrencyCharts(
 				fromCurrency, toCurrency);
 		resp.getWriter().print(searchCurrencyCharts);
 		resp.getWriter().flush();

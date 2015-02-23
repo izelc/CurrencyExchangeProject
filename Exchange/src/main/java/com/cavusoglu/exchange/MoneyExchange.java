@@ -16,7 +16,7 @@ import com.google.gson.JsonObject;
 
 public class MoneyExchange {
 
-	private static final String RESTFUL_API_URL = "http://localhost:8080/ExchangeAPI/ChartsServlet";
+	private static final String RESTFUL_API_URL = "http://localhost:8080/exchange-api/ChartsServlet";
 //	private Charts currencyCharts;
 
 	public MoneyExchange() { /* Creator pattern is used. */

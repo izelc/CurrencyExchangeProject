@@ -1,5 +1,7 @@
 package com.cavusoglu.exchange;
 
+import java.util.HashMap;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -10,14 +12,22 @@ public class ChartsSearcher {
 
 	private Logger logger = Logger.getLogger(getClass());
 
-	// private Charts currencyCharts;
+	private HashMap<String, Double> currencyCharts;
+	
+	public ChartsSearcher() {
+		// TODO Auto-generated constructor stub
+	}
 
-	private boolean hasCurrencyPair(Charts currencyCharts, String currency1,
+	public ChartsSearcher(HashMap<String, Double> chart) {
+
+		currencyCharts=chart;
+	}
+	private boolean hasCurrencyPair( String currency1,
 			String currency2) {
 
 		/* Checks if given currency parity exist in charts */
 
-		if (currencyCharts.getCurrencyCharts().containsKey(
+		if (currencyCharts.containsKey(
 				concatParity(currency1, currency2))) {
 			return true;
 		} else {
@@ -26,7 +36,7 @@ public class ChartsSearcher {
 
 	}
 
-	public double searchCurrencyCharts(Charts currencyCharts, String currency1,
+	public double searchCurrencyCharts(String currency1,
 			String currency2) throws CurrencyPairDoesntFoundException {
 
 		logger.info("Searching parity from charts. Currency1: " + currency1
@@ -41,11 +51,11 @@ public class ChartsSearcher {
 			parity = 1.0;
 		}
 
-		if (hasCurrencyPair(currencyCharts, currency1, currency2)) {
-			parity = currencyCharts.getCurrencyCharts().get(
+		if (hasCurrencyPair( currency1, currency2)) {
+			parity = currencyCharts.get(
 					concatParity(currency1, currency2));
-		} else if (hasCurrencyPair(currencyCharts, currency2, currency1)) {
-			parity = (1 / currencyCharts.getCurrencyCharts().get(
+		} else if (hasCurrencyPair(currency2, currency1)) {
+			parity = (1 / currencyCharts.get(
 					concatParity(currency2, currency1)));
 		} else {
 			throw new CurrencyPairDoesntFoundException();

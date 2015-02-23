@@ -23,7 +23,7 @@ public class MoneyExchangeTest {
 	@Test
 	public void testGetParityFromApi() throws Exception {
 		MoneyExchange exchange = new MoneyExchange();
-	exchange.getParity("USD", "EUR");
+	   System.out.println(exchange.getParity("USD", "EUR"));
 		
 
 	}

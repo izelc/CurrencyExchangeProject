@@ -26,18 +26,18 @@ public class ChartsSearcherTest {
 		exampleChart.put("EUR/GBP", 1.1);
 
 		Charts chart = Mockito.mock(Charts.class);
-		Mockito.when(chart.getCurrencyCharts()).thenReturn(exampleChart);
+		Mockito.when(Charts.getCurrencyCharts()).thenReturn(exampleChart);
 
 		assertEquals(2.35,
-				new ChartsSearcher().searchCurrencyCharts(chart, "USD", "TL"),
+				new ChartsSearcher().searchCurrencyCharts( "USD", "TL"),
 				0.0001);
 
 		assertEquals(1 / 2.35,
-				new ChartsSearcher().searchCurrencyCharts(chart, "TL", "USD"),
+				new ChartsSearcher().searchCurrencyCharts( "TL", "USD"),
 				0.0001);
 
 		assertEquals(1.1,
-				new ChartsSearcher().searchCurrencyCharts(chart, "EUR", "GBP"),
+				new ChartsSearcher().searchCurrencyCharts( "EUR", "GBP"),
 				0.0001);
 
 	}
