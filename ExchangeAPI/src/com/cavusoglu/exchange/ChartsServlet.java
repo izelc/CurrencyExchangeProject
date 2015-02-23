@@ -21,13 +21,7 @@ import com.google.gson.JsonObject;
 public class ChartsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ChartsServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -37,7 +31,7 @@ public class ChartsServlet extends HttpServlet {
 		JsonObject jsonObject = new Gson().fromJson(line, JsonObject.class);
 		String fromCurrency = jsonObject.get("fromCurrency").getAsString();
 		String toCurrency = jsonObject.get("toCurrency").getAsString();
-		double searchCurrencyCharts = new SearchOnCharts().searchCurrencyCharts(new Charts(),
+		double searchCurrencyCharts = new ChartsSearcher().searchCurrencyCharts(new Charts(),
 				fromCurrency, toCurrency);
 		resp.getWriter().print(searchCurrencyCharts);
 		resp.getWriter().flush();

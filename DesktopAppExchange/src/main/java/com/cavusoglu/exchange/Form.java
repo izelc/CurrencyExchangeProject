@@ -132,7 +132,7 @@ public class Form extends JFrame {
 				double result = 0;
 				try {
 					resultTextField.setText("");
-					result = mnyexc.calculate(fromComboBox.getSelectedItem()
+					result = mnyexc.convert(fromComboBox.getSelectedItem()
 							.toString(), toComboBox.getSelectedItem()
 							.toString(), Double.parseDouble(amountTextField
 							.getText()));

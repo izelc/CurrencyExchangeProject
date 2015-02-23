@@ -40,7 +40,7 @@ public class MoneyExchangeExceptionsTest {
 			throws Exception {
 		thrown.expect(NullPointerException.class);
 
-		new MoneyExchange().calculate(null, null, 10);
+		new MoneyExchange().convert(null, null, 10);
 
 	}
 
@@ -49,7 +49,7 @@ public class MoneyExchangeExceptionsTest {
 
 		Exception nullPointerException = null;
 		try {
-			new MoneyExchange().calculate("USD", "EUR", (Double) null);
+			new MoneyExchange().convert("USD", "EUR", (Double) null);
 		} catch (Exception e) {
 			nullPointerException = e;
 		}
@@ -59,7 +59,7 @@ public class MoneyExchangeExceptionsTest {
 		Exception a = null;
 
 		try {
-			new MoneyExchange().calculate("dasdhk", "dasd", 15);
+			new MoneyExchange().convert("dasdhk", "dasd", 15);
 
 		} catch (Exception e) {
 			a = e;
@@ -72,7 +72,7 @@ public class MoneyExchangeExceptionsTest {
 	@Test
 	public void throwsExceptionWhenAmountIsNegative() throws Exception {
 		thrown.expect(NegativeAmountException.class);
-		new MoneyExchange().calculate("USD", "EUR", -2);
+		new MoneyExchange().convert("USD", "EUR", -2);
 
 	}
 

@@ -26,7 +26,7 @@ public class MoneyExchange {
 	
 
 
-	public double calculate(String currency1, String currency2, double amount)
+	public double convert(String currency1, String currency2, double amount)
 			throws Exception {
 
 		/*
@@ -54,7 +54,7 @@ public class MoneyExchange {
 	 * @return parity as {@link String}
 	 * @throws Exception
 	 */
-	String getParity(String currency1, String currency2)
+	 String getParity(String currency1, String currency2)
 			throws Exception {
 		HttpClient client = new HttpClient(new SslContextFactory(true));
 		client.start();

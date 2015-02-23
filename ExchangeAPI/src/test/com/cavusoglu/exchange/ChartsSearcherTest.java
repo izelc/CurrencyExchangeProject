@@ -8,14 +8,14 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.matchers.Any;
 
-public class SearchOnChartsTest {
+public class ChartsSearcherTest {
 
 	@Test
 	public void testConcatParity() {
-		assertEquals("EUR/USD", new SearchOnCharts().concatParity("EUR", "USD"));
-		assertEquals("GBP/USD", new SearchOnCharts().concatParity("GBP", "USD"));
+		assertEquals("EUR/USD", new ChartsSearcher().concatParity("EUR", "USD"));
+		assertEquals("GBP/USD", new ChartsSearcher().concatParity("GBP", "USD"));
 
-		assertEquals("/", new SearchOnCharts().concatParity("", ""));
+		assertEquals("/", new ChartsSearcher().concatParity("", ""));
 	}
 
 	@Test
@@ -29,15 +29,15 @@ public class SearchOnChartsTest {
 		Mockito.when(chart.getCurrencyCharts()).thenReturn(exampleChart);
 
 		assertEquals(2.35,
-				new SearchOnCharts().searchCurrencyCharts(chart, "USD", "TL"),
+				new ChartsSearcher().searchCurrencyCharts(chart, "USD", "TL"),
 				0.0001);
 
 		assertEquals(1 / 2.35,
-				new SearchOnCharts().searchCurrencyCharts(chart, "TL", "USD"),
+				new ChartsSearcher().searchCurrencyCharts(chart, "TL", "USD"),
 				0.0001);
 
 		assertEquals(1.1,
-				new SearchOnCharts().searchCurrencyCharts(chart, "EUR", "GBP"),
+				new ChartsSearcher().searchCurrencyCharts(chart, "EUR", "GBP"),
 				0.0001);
 
 	}

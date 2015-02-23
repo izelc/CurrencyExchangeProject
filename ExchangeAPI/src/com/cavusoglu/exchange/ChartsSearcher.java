@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
  * @author Izel Cavusoglu
  *This class is used for carrying out secure and concise searches on given chart.
  */
-public class SearchOnCharts {
+public class ChartsSearcher {
 
 	private Logger logger = Logger.getLogger(getClass());
 

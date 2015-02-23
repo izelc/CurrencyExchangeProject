@@ -27,7 +27,7 @@ public class SumOfCurrencies {
 		 * eligible for adding more than two currencies.
 		 */
 		double sum = totalCurrencyAmount
-				+ moneyExchange.calculate(addentCurrencyUnit,
+				+ moneyExchange.convert(addentCurrencyUnit,
 						resultCurrencyUnit, addentCurrencyAmount);
 		return String.format("%.02f", sum);
 	}
@@ -39,9 +39,9 @@ public class SumOfCurrencies {
 		 * this method sums two different currencies with respect to given
 		 * different currency.
 		 */
-		double sum = moneyExchange.calculate(addentCurrencyUnit1,
+		double sum = moneyExchange.convert(addentCurrencyUnit1,
 				resultCurrencyUnit, addentCurrencyAmount1)
-				+ moneyExchange.calculate(addentCurrencyUnit2,
+				+ moneyExchange.convert(addentCurrencyUnit2,
 						resultCurrencyUnit, addentCurrencyAmount2);
 		return String.format("%.02f", sum) + " " + resultCurrencyUnit;
 	}

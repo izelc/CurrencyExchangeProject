@@ -36,7 +36,7 @@ public class ConvertServlet extends HttpServlet {
 		MoneyExchange exchange = new MoneyExchange();
 		double result = 0;
 		try {
-			result = exchange.calculate(fromCurrency, toCurrency,
+			result = exchange.convert(fromCurrency, toCurrency,
 					Double.parseDouble(amount));
 		} catch (NumberFormatException e) {
 		} catch (Exception e) {

@@ -11,6 +11,15 @@ h3 {
 	color: blue;
 }
 </style>
+
+<script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -32,7 +41,8 @@ h3 {
 			<div class="col-md-2">
 				<h3>Amount:</h3>
 				<input type="text" id="addentAmountTextBox1"
-					name="addentAmountTextBox1" class="form-control">
+					name="addentAmountTextBox1" class="form-control" type="number"
+					onkeypress="return isNumberKey(event)">
 			</div>
 
 			<div class="col-md-2">
@@ -54,7 +64,8 @@ h3 {
 			<div class="col-md-2">
 				<h3>Amount:</h3>
 				<input type="text" name="addentAmountTextBox2"
-					id="addentAmountTextBox2" class="form-control">
+					id="addentAmountTextBox2" class="form-control" type="number"
+					onkeypress="return isNumberKey(event)">
 			</div>
 
 			<div class="col-md-2">
@@ -69,7 +80,7 @@ h3 {
 			</div>
 
 			<div class="col-md-2">
-				<button name="addButton" id="addButton"  type="submit"
+				<button name="addButton" id="addButton" type="submit"
 					style="margin-top: 53px; background-color: pink; padding: 6px 33px;"
 					class="btn btn-default">=</button>
 			</div>
@@ -92,7 +103,7 @@ h3 {
 			<div class="col-md-2">
 				<h3>Result:</h3>
 				<input type="text" name="resultTextBox" id="resultTextBox"
-					class="form-control">
+					class="form-control" readonly>
 			</div>
 		</div>
 </body>
