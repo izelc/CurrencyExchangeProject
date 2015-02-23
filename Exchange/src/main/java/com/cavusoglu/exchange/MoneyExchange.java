@@ -16,15 +16,13 @@ import com.google.gson.JsonObject;
 
 public class MoneyExchange {
 
-	private static final String RESTFUL_API_URL = "http://localhost:8080/exchange-api/ChartsServlet";
-//	private Charts currencyCharts;
+	private static final String RESTFUL_API_URL = "http://localhost:8080/ExchangeAPI/ChartsServlet";
+
+	// private Charts currencyCharts;
 
 	public MoneyExchange() { /* Creator pattern is used. */
-	//	currencyCharts = new Charts();
+		// currencyCharts = new Charts();
 	}
-
-	
-
 
 	public double convert(String currency1, String currency2, double amount)
 			throws Exception {
@@ -54,8 +52,7 @@ public class MoneyExchange {
 	 * @return parity as {@link String}
 	 * @throws Exception
 	 */
-	 String getParity(String currency1, String currency2)
-			throws Exception {
+	String getParity(String currency1, String currency2) throws Exception {
 		HttpClient client = new HttpClient(new SslContextFactory(true));
 		client.start();
 		String apiResult = client

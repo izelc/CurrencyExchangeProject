@@ -22,8 +22,6 @@ import com.google.gson.JsonObject;
 public class ChartsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -32,10 +30,10 @@ public class ChartsServlet extends HttpServlet {
 		JsonObject jsonObject = new Gson().fromJson(line, JsonObject.class);
 		String fromCurrency = jsonObject.get("fromCurrency").getAsString();
 		String toCurrency = jsonObject.get("toCurrency").getAsString();
-		
-		HashMap<String, Double> currencyCharts= Charts.getCurrencyCharts();
-		double searchCurrencyCharts = new ChartsSearcher(currencyCharts).searchCurrencyCharts(
-				fromCurrency, toCurrency);
+
+		Charts currencyCharts = Charts.getInstance();
+		double searchCurrencyCharts = new ChartsSearcher(currencyCharts)
+				.searchCurrencyCharts(fromCurrency, toCurrency);
 		resp.getWriter().print(searchCurrencyCharts);
 		resp.getWriter().flush();
 	}

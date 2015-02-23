@@ -1,11 +1,11 @@
 package com.cavusoglu.exchange;
 
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.jsoup.nodes.Document;
-import org.jsoup.Jsoup;
 
 /**
  * @author Izel Cavusoglu This class defines parities and values of parities are
@@ -13,47 +13,64 @@ import org.jsoup.Jsoup;
  *
  */
 public class Charts {
-	
 
-	//private static Logger logger = Logger.getLogger(getClass());
-	private static HashMap<String, Double> currencyCharts = new HashMap<String, Double>();
+	// private static Logger logger = Logger.getLogger(getClass());
+	private HashMap<String, Double> currencyCharts = new HashMap<String, Double>();
+	private static Charts chart = null;
+	private ScheduledExecutorService executor = Executors
+			.newScheduledThreadPool(1);
 
-	private Charts() {}
-	
-	
+	private Charts() {
+		executor.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				fillHasHmap();
+			}
+		}, 0, 2, TimeUnit.MINUTES);
+	}
 
-	public static HashMap<String, Double> getCurrencyCharts() {
-		fillHasHmap();
+	public static Charts getInstance() {
+		if (chart == null) {
+			chart = new Charts();
+		}
+		return chart;
+	}
+
+	public void fillHasHmap() {
+		// logger.trace("constructing chart object");
+		try {
+			PropertyConfigurator.configure("log4j.properties");
+
+			getCurrencyCharts().put("USD/GBP",
+					new GoogleCurrencyFetcher().getParity("USDGBP"));
+
+			getCurrencyCharts().put("EUR/USD",
+					new GoogleCurrencyFetcher().getParity("EURUSD"));
+
+			getCurrencyCharts().put("EUR/GBP",
+					new GoogleCurrencyFetcher().getParity("EURGBP"));
+
+			getCurrencyCharts().put("TL/GBP",
+					new GoogleCurrencyFetcher().getParity("TRYGBP"));
+
+			getCurrencyCharts().put("TL/USD",
+					new GoogleCurrencyFetcher().getParity("TRYUSD"));
+
+			getCurrencyCharts().put("TL/EUR",
+					new GoogleCurrencyFetcher().getParity("TRYEUR"));
+
+		} catch (Exception e) {
+			// logger.error("error occured while constructing chart object", e);
+		}
+
+	}
+
+	public HashMap<String, Double> getCurrencyCharts() {
 		return currencyCharts;
 	}
-	
-	public static void fillHasHmap() {
-//		logger.trace("constructing chart object");
-			try {
-				PropertyConfigurator.configure("log4j.properties");
 
-				currencyCharts.put("USD/GBP",
-						new GoogleCurrencyFetcher().getParity("USDGBP"));
-
-				currencyCharts.put("EUR/USD",
-						new GoogleCurrencyFetcher().getParity("EURUSD"));
-
-				currencyCharts.put("EUR/GBP",
-						new GoogleCurrencyFetcher().getParity("EURGBP"));
-
-				currencyCharts.put("TL/GBP",
-						new GoogleCurrencyFetcher().getParity("TRYGBP"));
-
-				currencyCharts.put("TL/USD",
-						new GoogleCurrencyFetcher().getParity("TRYUSD"));
-
-				currencyCharts.put("TL/EUR",
-						new GoogleCurrencyFetcher().getParity("TRYEUR"));
-
-			} catch (Exception e) {
-			//	logger.error("error occured while constructing chart object", e);
-			}
-
+	public void setCurrencyCharts(HashMap<String, Double> currencyCharts) {
+		this.currencyCharts = currencyCharts;
 	}
 
 }

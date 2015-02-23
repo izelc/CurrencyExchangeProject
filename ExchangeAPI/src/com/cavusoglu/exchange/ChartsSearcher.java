@@ -1,33 +1,31 @@
 package com.cavusoglu.exchange;
 
-import java.util.HashMap;
-
 import org.apache.log4j.Logger;
 
 /**
- * @author Izel Cavusoglu
- *This class is used for carrying out secure and concise searches on given chart.
+ * @author Izel Cavusoglu This class is used for carrying out secure and concise
+ *         searches on given chart.
  */
 public class ChartsSearcher {
 
 	private Logger logger = Logger.getLogger(getClass());
 
-	private HashMap<String, Double> currencyCharts;
-	
+	private Charts currencyCharts;
+
 	public ChartsSearcher() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChartsSearcher(HashMap<String, Double> chart) {
+	public ChartsSearcher(Charts chart) {
 
-		currencyCharts=chart;
+		currencyCharts = chart;
 	}
-	private boolean hasCurrencyPair( String currency1,
-			String currency2) {
+
+	private boolean hasCurrencyPair(String currency1, String currency2) {
 
 		/* Checks if given currency parity exist in charts */
 
-		if (currencyCharts.containsKey(
+		if (currencyCharts.getCurrencyCharts().containsKey(
 				concatParity(currency1, currency2))) {
 			return true;
 		} else {
@@ -36,8 +34,8 @@ public class ChartsSearcher {
 
 	}
 
-	public double searchCurrencyCharts(String currency1,
-			String currency2) throws CurrencyPairDoesntFoundException {
+	public double searchCurrencyCharts(String currency1, String currency2)
+			throws CurrencyPairDoesntFoundException {
 
 		logger.info("Searching parity from charts. Currency1: " + currency1
 				+ "Currency2: " + currency2);
@@ -51,12 +49,11 @@ public class ChartsSearcher {
 			parity = 1.0;
 		}
 
-		if (hasCurrencyPair( currency1, currency2)) {
-			parity = currencyCharts.get(
-					concatParity(currency1, currency2));
+		if (hasCurrencyPair(currency1, currency2)) {
+			parity = currencyCharts.getCurrencyCharts().get(concatParity(currency1, currency2));
 		} else if (hasCurrencyPair(currency2, currency1)) {
-			parity = (1 / currencyCharts.get(
-					concatParity(currency2, currency1)));
+			parity = (1 / currencyCharts.getCurrencyCharts()
+					.get(concatParity(currency2, currency1)));
 		} else {
 			throw new CurrencyPairDoesntFoundException();
 		}
