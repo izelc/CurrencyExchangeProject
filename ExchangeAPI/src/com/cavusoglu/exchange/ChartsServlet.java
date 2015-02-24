@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -21,7 +23,9 @@ import com.google.gson.JsonObject;
 @WebServlet("/ChartsServlet")
 public class ChartsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+    private ChartsSearcher chartsSearcher;
+	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -32,7 +36,8 @@ public class ChartsServlet extends HttpServlet {
 		String toCurrency = jsonObject.get("toCurrency").getAsString();
 
 		Charts currencyCharts = Charts.getInstance();
-		double searchCurrencyCharts = new ChartsSearcher(currencyCharts)
+		chartsSearcher=new ChartsSearcher(currencyCharts);
+		double searchCurrencyCharts =chartsSearcher
 				.searchCurrencyCharts(fromCurrency, toCurrency);
 		resp.getWriter().print(searchCurrencyCharts);
 		resp.getWriter().flush();

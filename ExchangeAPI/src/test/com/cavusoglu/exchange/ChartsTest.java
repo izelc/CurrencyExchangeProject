@@ -64,13 +64,17 @@ public class ChartsTest {
 
 	@Test
 	public void testName() throws Exception {
-		ChartsSearcher cs = new ChartsSearcher(Charts.getInstance());
+		Charts charts = Charts.getInstance();
+		//Thread.sleep(20000);
+		ChartsSearcher cs = new ChartsSearcher(charts);
+		cs.searchCurrencyCharts("USD", "EUR");
+		cs.searchCurrencyCharts("JPY", "TL");
 	}
 
-	@Test
-	public void chartFixedService() throws Exception {
-		Charts charts = Charts.getInstance();
-		Thread.sleep(45000);
-	}
+//	@Test
+//	public void chartFixedService() throws Exception {
+//		Charts charts = Charts.getInstance();
+//		Thread.sleep(45000);
+//	}
 
 }

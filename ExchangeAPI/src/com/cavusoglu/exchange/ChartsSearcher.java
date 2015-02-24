@@ -36,8 +36,9 @@ public class ChartsSearcher {
 
 	public double searchCurrencyCharts(String currency1, String currency2)
 			throws CurrencyPairDoesntFoundException {
+	
 
-		logger.info("Searching parity from charts. Currency1: " + currency1
+		logger.trace("Searching parity from charts. Currency1: " + currency1
 				+ "Currency2: " + currency2);
 		/*
 		 * This method looks for concatenated symbols of two currencies at given
@@ -54,10 +55,12 @@ public class ChartsSearcher {
 		} else if (hasCurrencyPair(currency2, currency1)) {
 			parity = (1 / currencyCharts.getCurrencyCharts()
 					.get(concatParity(currency2, currency1)));
+			logger.trace("Parity is registered as "+currency2+"/"+currency1);
 		} else {
+			logger.error("At hashmap,there is no parity like "+ currency1+"/"+currency2+" or "+ currency2+"/"+currency1);
 			throw new CurrencyPairDoesntFoundException();
 		}
-		logger.debug("Found parity for curencies. Parity: " + parity
+		logger.info("Found parity for curencies. Parity: " + parity
 				+ " Currency1: " + currency1 + " Currency2: " + currency2);
 		return parity;
 	}

@@ -13,7 +13,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class indexHtmlTest {
 
@@ -38,7 +40,12 @@ public class indexHtmlTest {
 				.id("toCurrencyComboBox")));
 		select2.selectByValue("USD");
 		driver.findElement(By.id("calculateButton")).click();
-		Thread.sleep(5000);
+		
+		(new WebDriverWait(driver, 60)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.findElement(By.id("resultTextBox")).getText().length() != 0;
+            }
+        });
 		String result = driver.findElement(By.id("resultTextBox"))
 				.getAttribute("value");
 		double expected = 10 * getParity(getDocument("EURJPY"),

@@ -38,7 +38,7 @@ public class GoogleCurrencyFetcher {
 		
 		String cssPath="#currency_value > div.sfe-break-bottom-4 > span.pr > span";
 		
-		logger.trace("katsayi alindi" + convertCurrencyDataToDouble(document.select(cssPath).text()));
+		logger.trace("Parity is found :" + convertCurrencyDataToDouble(document.select(cssPath).text())+" for "+q);
 		
 		return convertCurrencyDataToDouble(document.select(cssPath).text());
 		
