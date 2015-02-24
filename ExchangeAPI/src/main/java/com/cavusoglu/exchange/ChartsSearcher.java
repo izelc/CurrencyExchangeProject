@@ -18,6 +18,7 @@ public class ChartsSearcher {
 
 	public ChartsSearcher(Charts chart) {
 
+
 		currencyCharts = chart;
 	}
 

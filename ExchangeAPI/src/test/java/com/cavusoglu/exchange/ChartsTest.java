@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
@@ -65,10 +66,11 @@ public class ChartsTest {
 	@Test
 	public void testName() throws Exception {
 		Charts charts = Charts.getInstance();
-		//Thread.sleep(20000);
+	    Thread.sleep(20000);
 		ChartsSearcher cs = new ChartsSearcher(charts);
 		cs.searchCurrencyCharts("USD", "EUR");
-		cs.searchCurrencyCharts("JPY", "TL");
+	//	cs.searchCurrencyCharts("JPY", "TL");
+		
 	}
 
 //	@Test

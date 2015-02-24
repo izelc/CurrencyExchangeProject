@@ -17,6 +17,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class Charts {
 	
 
+ 
 	private static final Logger logger = Logger.getLogger(Charts.class);
 	private HashMap<String, Double> currencyCharts = new HashMap<String, Double>();
 	private static Charts chart = null;
@@ -24,8 +25,9 @@ public class Charts {
 			.newScheduledThreadPool(1);
 
 	private Charts() {
-	System.err.println("Charts constructor is working");
-	logger.trace("getInstance");
+
+ 
+	logger.trace("Charts constructor is working");
 		executor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
@@ -35,8 +37,7 @@ public class Charts {
 	}
 
 	public static Charts getInstance() {
-		logger.trace("getInstance");
-		System.err.println("getInstance() is working");
+		logger.trace("getInstance is working");
 
 		if (chart == null) {
 			chart = new Charts();
@@ -46,10 +47,8 @@ public class Charts {
 	}
 
 	public void fillHasHmap() {
-		logger.trace("constructing chart object");
-		System.err.println("fillHashMap() is working");
+		logger.trace("fillHashMap() is working");
 		try {
-			PropertyConfigurator.configure("log4j.properties");
 
 			getCurrencyCharts().put("USD/GBP",
 					new GoogleCurrencyFetcher().getParity("USDGBP"));
