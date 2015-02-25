@@ -12,9 +12,41 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 public class ChartsTest {
+	GoogleCurrencyFetcher mock = Mockito.mock(GoogleCurrencyFetcher.class);
+
+@Before
+	public void before() {
+	Mockito.when(mock.getParity(Matchers.anyString())).thenReturn(3.0);
+
+	}
+
+
+@Test
+public void testFillHashMap() throws Exception {
+Charts instance = Charts.getInstance();
+instance.fillHasHmap(mock);
+assertEquals(3, instance.getCurrencyCharts().get("TL/USD"), 0.001);
+
+
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// @Before
 	// public void before() throws IOException {
@@ -66,7 +98,7 @@ public class ChartsTest {
 	@Test
 	public void testName() throws Exception {
 		Charts charts = Charts.getInstance();
-	    Thread.sleep(20000);
+	   // Thread.sleep(20000);
 		ChartsSearcher cs = new ChartsSearcher(charts);
 		cs.searchCurrencyCharts("USD", "EUR");
 	//	cs.searchCurrencyCharts("JPY", "TL");

@@ -5,19 +5,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 /**
  * @author Izel Cavusoglu This class defines parities and values of parities are
  *         taken from web dynamically.
- *
  */
 public class Charts {
-	
-
- 
 	private static final Logger logger = Logger.getLogger(Charts.class);
 	private HashMap<String, Double> currencyCharts = new HashMap<String, Double>();
 	private static Charts chart = null;
@@ -25,52 +19,53 @@ public class Charts {
 			.newScheduledThreadPool(1);
 
 	private Charts() {
-
- 
-	logger.trace("Charts constructor is working");
+		fillHasHmap(new GoogleCurrencyFetcher());
+		logger.trace("Charts constructor is working");
 		executor.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
-				fillHasHmap();
+				fillHasHmap(new GoogleCurrencyFetcher());
 			}
 		}, 0, 2, TimeUnit.MINUTES);
 	}
 
+	/**
+	 * @return returns the only object of charts
+	 */
 	public static Charts getInstance() {
 		logger.trace("getInstance is working");
-
 		if (chart == null) {
 			chart = new Charts();
-			
 		}
 		return chart;
 	}
 
-	public void fillHasHmap() {
+	/**
+	 * it fills hashmap with datas taken from google finance.
+	 */
+	public void fillHasHmap(GoogleCurrencyFetcher gf) {
 		logger.trace("fillHashMap() is working");
 		try {
-
 			getCurrencyCharts().put("USD/GBP",
-					new GoogleCurrencyFetcher().getParity("USDGBP"));
+					gf.getParity("USDGBP"));
 
 			getCurrencyCharts().put("EUR/USD",
-					new GoogleCurrencyFetcher().getParity("EURUSD"));
+					gf.getParity("EURUSD"));
 
 			getCurrencyCharts().put("EUR/GBP",
-					new GoogleCurrencyFetcher().getParity("EURGBP"));
+					gf.getParity("EURGBP"));
 
 			getCurrencyCharts().put("TL/GBP",
-					new GoogleCurrencyFetcher().getParity("TRYGBP"));
+					gf.getParity("TRYGBP"));
 
 			getCurrencyCharts().put("TL/USD",
-					new GoogleCurrencyFetcher().getParity("TRYUSD"));
+					gf.getParity("TRYUSD"));
 
 			getCurrencyCharts().put("TL/EUR",
-					new GoogleCurrencyFetcher().getParity("TRYEUR"));
+					gf.getParity("TRYEUR"));
 
 		} catch (Exception e) {
-		 logger.error("error occured while constructing hashMap", e);
-		 System.err.println("Error occured while fillHashMap() is working");
+			logger.error("error occured while constructing hashMap", e);
 		}
 
 	}
